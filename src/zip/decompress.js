@@ -1,11 +1,10 @@
 import { createReadStream, createWriteStream } from "node:fs";
 import { createGunzip } from "node:zlib";
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { pipeline } from "node:stream";
+import { getDirname } from '../getDirname.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = getDirname(import.meta.url);
 
 const decompress = async () => {
     const source = createReadStream(join(__dirname, 'files', 'archive.gz'));

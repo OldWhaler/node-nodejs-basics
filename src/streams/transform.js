@@ -4,21 +4,21 @@ const transform = async () => {
     const readStream = process.stdin;
     const writeStream = process.stdout;
 
-    const transform = new Transform({
+    const revert = new Transform({
         transform(chunk, enc, cb) {
             const reverse = chunk
                 .toString()
                 .trim()
                 .split('')
                 .reverse()
-                .join('');
+                .join('') + '\n';
             cb(null, reverse)
         }
     });
 
     pipeline(
         readStream,
-        transform,
+        revert,
         writeStream,
         err => console.log(err)
     )
